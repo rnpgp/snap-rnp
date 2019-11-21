@@ -7,11 +7,14 @@
 
 The released `rnp` snap package is located at Snapcraft: https://snapcraft.io/rnp[rnp snap].
 
-
 == Building the package
 
 * Run `snapcraft snap` in the root directory of this repo
 
+== Publishing the package
+
+* Run `snapcraft push <snap filename>` in the root directory of this repo
+* Release from the dashboard (https://dashboard.snapcraft.io/snaps/rnp) after approval
 
 == Testing the package
 

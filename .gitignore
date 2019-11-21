@@ -2,3 +2,9 @@
 /squashfs-root
 *.snap
 .tmp.xml
+prime/
+stage/
+parts/
+*source.tar.bz2
+*.snap-build*
+.vscode/
