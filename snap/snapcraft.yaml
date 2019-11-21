@@ -1,0 +1,33 @@
+name: rnp
+base: core18
+version: '0.1.1'
+summary: rnp
+description: |
+  RNP is ...
+
+grade: stable
+confinement: strict
+
+parts:
+  rnp:
+apps:
+  rnp:
+    environment:
+      LC_ALL: "C.UTF-8"
+    command: bash $SNAP/usr/bin/perl5lib.sh $SNAP/usr/local/bin/rnp
+  c:
+    environment:
+      LC_ALL: "C.UTF-8"
+    command: bash $SNAP/usr/bin/perl5lib.sh $SNAP/usr/local/bin/rnpc
+  find:
+    environment:
+      LC_ALL: "C.UTF-8"
+    command: bash $SNAP/usr/bin/perl5lib.sh $SNAP/usr/local/bin/rnpfind
+  math:
+    environment:
+      LC_ALL: "C.UTF-8"
+    command: bash $SNAP/usr/bin/perl5lib.sh $SNAP/usr/local/bin/rnpmath
+  post:
+    environment:
+      LC_ALL: "C.UTF-8"
+    command: bash $SNAP/usr/bin/perl5lib.sh $SNAP/usr/local/bin/rnppost

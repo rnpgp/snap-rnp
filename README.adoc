@@ -1,0 +1,41 @@
+= rnp-snap: RNP Snap Package
+
+// image:https://img.shields.io/travis/metanorma/rnp-snap/master.svg["Build Status", link="https://travis-ci.com/metanorma/rnp-snap"]
+
+
+== Installation
+
+The released `rnp` snap package is located at Snapcraft: https://snapcraft.io/rnp[rnp snap].
+
+
+== Building the package
+
+* Run `snapcraft snap` in the root directory of this repo
+
+
+== Testing the package
+
+If you are on macOS you can install snap to any of your multipass instances with:
+
+[source,sh]
+----
+multipass transfer rnp_*_amd64.snap ${instance-name}:/home/multipass
+multipass shell ${instance-name}
+sudo snap install --devmode rnp_*_amd64.snap
+----
+
+After this the snap is ready to use.
+
+
+=== Testing uninstallation
+
+Execute the following command to uninstall rnp.
+
+[source,sh]
+----
+sudo snap remove rnp
+----
+
+After executing the uninstall ensure that the `rnp` executable is no longer found.
+
+You can also try running `rnp --VERSION` from the command-line to see if it is still installed.

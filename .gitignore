@@ -1,0 +1,4 @@
+/snap/plugins/__pycache__
+/squashfs-root
+*.snap
+.tmp.xml
