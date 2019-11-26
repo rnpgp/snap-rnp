@@ -12,6 +12,8 @@ jobs:
     - name: Install Snapcraft
       uses: samuelmeuli/action-snapcraft@v1
     - name: Build snap
+      env: 
+        SNAPCRAFT_BUILD_ENVIRONMENT: host
       run: snapcraft snap --output=rnp_latest.snap
     - name: Push snap
       run: snapcraft push --release=stable rnp_latest.snap
