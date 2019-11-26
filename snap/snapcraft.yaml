@@ -1,6 +1,6 @@
 name: rnp
 base: core18
-version: '0.1.1'
+version: git
 summary: High performance C++ OpenPGP tools, fully compliant to RFC 4880 # 79 char long summary
 description: |
   RNP is a set of OpenPGP (RFC4880) tools that works on Linux, *BSD and macOS as a replacement of GnuPG.
