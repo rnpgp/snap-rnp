@@ -1,0 +1,17 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-18.04
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Install Snapcraft
+      uses: samuelmeuli/action-snapcraft@v1
+    - name: Build snap
+      run: snapcraft snap --output=rnp_latest.snap
+    - name: Push snap
+      run: snapcraft push --release=stable rnp_latest.snap
