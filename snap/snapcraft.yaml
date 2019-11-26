@@ -1,33 +1,47 @@
 name: rnp
 base: core18
-version: '0.1.1'
-summary: rnp
+version: git
+summary: High performance C++ OpenPGP tools, fully compliant to RFC 4880 # 79 char long summary
 description: |
-  RNP is ...
+  RNP is a set of OpenPGP (RFC4880) tools that works on Linux, *BSD and macOS as a replacement of GnuPG.
+  It is maintained by Ribose after being forked from NetPGP, itself originally written for NetBSD.
 
 grade: stable
 confinement: strict
 
 parts:
   rnp:
+    after: ["botan2"]
+    plugin: cmake
+    source-type: git
+    source: https://github.com/rnpgp/rnp.git
+    build-packages:
+      - g++
+      - make
+      - cmake
+      - libbz2-dev
+      - libz-dev
+      - libjson-c-dev
+    stage-packages:
+      - bzip2
+      - zlib1g
+      - libjson-c3
+  botan2:
+    plugin: make
+    override-build: ./configure.py && snapcraftctl build
+    source: https://botan.randombit.net/releases/Botan-2.12.1.tar.xz
+    build-packages:
+      - g++
+      - make
+      - python-minimal
+    stage-packages:
+      - bzip2
+      - zlib1g
+    organize:
+      usr/local/lib: lib
+      usr/local/include: include
 apps:
   rnp:
-    environment:
-      LC_ALL: "C.UTF-8"
-    command: bash $SNAP/usr/bin/perl5lib.sh $SNAP/usr/local/bin/rnp
-  c:
-    environment:
-      LC_ALL: "C.UTF-8"
-    command: bash $SNAP/usr/bin/perl5lib.sh $SNAP/usr/local/bin/rnpc
-  find:
-    environment:
-      LC_ALL: "C.UTF-8"
-    command: bash $SNAP/usr/bin/perl5lib.sh $SNAP/usr/local/bin/rnpfind
-  math:
-    environment:
-      LC_ALL: "C.UTF-8"
-    command: bash $SNAP/usr/bin/perl5lib.sh $SNAP/usr/local/bin/rnpmath
-  post:
-    environment:
-      LC_ALL: "C.UTF-8"
-    command: bash $SNAP/usr/bin/perl5lib.sh $SNAP/usr/local/bin/rnppost
+    command: bin/rnp
+  rnpkeys:
+    command: bin/rnpkeys
