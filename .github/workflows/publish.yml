@@ -13,7 +13,7 @@ jobs:
       uses: samuelmeuli/action-snapcraft@v1
     - name: Build snap
       env: 
-        SNAPCRAFT_BUILD_ENVIRONMENT: managed-host
+        SNAPCRAFT_BUILD_ENVIRONMENT: host
         PC_BOTAN2_INCLUDEDIR: ${{ github.workspace }}/stage/include
         PC_BOTAN2_LIBDIR: ${{ github.workspace }}/stage/lib
       run: snapcraft snap --output=rnp_latest.snap
