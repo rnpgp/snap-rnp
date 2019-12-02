@@ -28,7 +28,7 @@ parts:
       - libjson-c3
   botan2:
     plugin: make
-    override-build: ./configure.py && snapcraftctl build
+    override-build: ./configure.py --prefix=/usr && snapcraftctl build
     source: https://botan.randombit.net/releases/Botan-2.12.1.tar.xz
     build-packages:
       - g++
@@ -37,9 +37,6 @@ parts:
     stage-packages:
       - bzip2
       - zlib1g
-    organize:
-      usr/local/lib: lib
-      usr/local/include: include
 apps:
   rnp:
     command: bin/rnp
