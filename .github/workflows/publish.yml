@@ -17,6 +17,6 @@ jobs:
       run: snapcraft snap --output=rnp_latest.snap
     - name: Push snap
       run: |
-        echo "${secrets.SNAPCRAFT_RELEASE_LOGIN}" > snap-exported-login
+        echo "${{ secrets.SNAPCRAFT_RELEASE_LOGIN }}" > snap-exported-login
         snapcraft login --with snap-exported-login
         snapcraft push --release=edge rnp_latest.snap
