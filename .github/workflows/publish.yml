@@ -14,10 +14,6 @@ jobs:
     - name: Build snap
       env: 
         SNAPCRAFT_BUILD_ENVIRONMENT: host
-        PC_BOTAN2_INCLUDEDIR: ${{ github.workspace }}/stage/include
-        PC_BOTAN2_INCLUDE_DIRS: ${{ github.workspace }}/stage/include
-        PC_BOTAN2_LIBDIR: ${{ github.workspace }}/stage/lib
-        PC_BOTAN2_LIBRARY_DIRS: ${{ github.workspace }}/stage/lib
       run: snapcraft snap --output=rnp_latest.snap
     - name: Push snap
       run: |
