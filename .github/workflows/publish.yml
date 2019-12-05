@@ -20,4 +20,7 @@ jobs:
         PC_BOTAN2_LIBRARY_DIRS: ${{ github.workspace }}/stage/lib
       run: snapcraft snap --output=rnp_latest.snap
     - name: Push snap
-      run: snapcraft push --release=edge rnp_latest.snap
+      run: |
+        echo "${secrets.SNAPCRAFT_RELEASE_LOGIN}" > snap-exported-login
+        snapcraft login --with snap-exported-login
+        snapcraft push --release=edge rnp_latest.snap
