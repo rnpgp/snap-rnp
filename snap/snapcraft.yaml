@@ -1,6 +1,6 @@
 name: rnp
 base: core18
-version: git
+adopt-info: rnp
 summary: High performance C++ OpenPGP tools, fully compliant to RFC 4880 # 79 char long summary
 description: |
   RNP is a set of OpenPGP (RFC4880) tools that works on Linux, *BSD and macOS as a replacement of GnuPG.
@@ -13,6 +13,14 @@ parts:
   rnp:
     after: ["botan2"]
     plugin: cmake
+    override-pull: |
+      snapcraftctl pull
+      last_committed_tag="$(git tag -l --sort=-v:refname | head -1)"
+      VERSION=${last_committed_tag}
+      git fetch
+      git checkout "${VERSION}"
+      echo "Setting version to $VERSION"
+      snapcraftctl set-version "${VERSION}"
     source-type: git
     source: https://github.com/rnpgp/rnp.git
     build-packages:
@@ -26,6 +34,9 @@ parts:
       - bzip2
       - zlib1g
       - libjson-c3
+    prime:
+      - bin/rnp
+      - bin/rnpkeys
   botan2:
     plugin: make
     override-build: ./configure.py --prefix=/usr && snapcraftctl build
@@ -37,6 +48,8 @@ parts:
     stage-packages:
       - bzip2
       - zlib1g
+    prime:
+      - usr/lib/libbotan*.so*
 apps:
   rnp:
     command: bin/rnp
