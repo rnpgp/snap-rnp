@@ -40,7 +40,8 @@ parts:
   botan2:
     plugin: make
     override-build: ./configure.py --prefix=/usr && snapcraftctl build
-    source: https://botan.randombit.net/releases/Botan-2.12.1.tar.xz
+    source: https://botan.randombit.net/releases/Botan-2.13.0.tar.xz
+    source-checksum: sha256/f57ae42a41e1091bca58f44f41addebd9a390b651603952c881ec89d50187e90
     build-packages:
       - g++
       - make
