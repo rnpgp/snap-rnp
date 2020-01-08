@@ -20,7 +20,7 @@ jobs:
         CHANNEL: edge
       run: |
         channel_version=$(snap info rnp | awk -v tag="$CHANNEL:" '$1 == tag { print $2 }')
-        echo "The channel $CHANNEL contains version $snap_version."
+        echo "The channel $CHANNEL contains version $channel_version."
         snap_version=$(snap info rnp_latest.snap | awk '$1 == "version:" { print $2 }')
         if [ "${channel_version}" != "${snap_version}" ]; then
           echo "Pushing the new version $snap_version to channel $CHANNEL"
