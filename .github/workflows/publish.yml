@@ -17,7 +17,7 @@ jobs:
       run: snapcraft snap --output=rnp_latest.snap
     - name: Push snap
       env:
-        CHANNEL: edge
+        CHANNEL: beta
       run: |
         channel_version=$(snap info rnp | awk -v tag="$CHANNEL:" '$1 == tag { print $2 }')
         echo "The channel $CHANNEL contains version $channel_version."
