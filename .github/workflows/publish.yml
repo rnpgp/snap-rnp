@@ -16,7 +16,17 @@ jobs:
         SNAPCRAFT_BUILD_ENVIRONMENT: host
       run: snapcraft snap --output=rnp_latest.snap
     - name: Push snap
+      env:
+        CHANNEL: beta
       run: |
-        echo "${{ secrets.SNAPCRAFT_RELEASE_LOGIN }}" > snap-exported-login
-        snapcraft login --with snap-exported-login
-        snapcraft push --release=edge rnp_latest.snap
+        channel_version=$(snap info rnp | awk -v tag="$CHANNEL:" '$1 == tag { print $2 }')
+        echo "The channel $CHANNEL contains version $channel_version."
+        snap_version=$(snap info rnp_latest.snap | awk '$1 == "version:" { print $2 }')
+        if [ "${channel_version}" != "${snap_version}" ]; then
+          echo "Pushing the new version $snap_version to channel $CHANNEL"
+          echo "${{ secrets.SNAPCRAFT_RELEASE_LOGIN }}" > snap-exported-login
+          snapcraft login --with snap-exported-login
+          snapcraft push --release=$CHANNEL rnp_latest.snap
+        else
+          echo "The version $snap_version already present in the channel. Cancelling the push."
+        fi
